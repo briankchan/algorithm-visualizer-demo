@@ -1,0 +1,63 @@
+{
+	// Use IntelliSense to learn about possible attributes.
+	// Hover to view descriptions of existing attributes.
+	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Launch Subarray Sum",
+			"request": "launch",
+			"mainClass": "subarraysum.Main",
+			"traceOutputFile": "./src/subarraysum/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch GCD",
+			"request": "launch",
+			"mainClass": "gcd.Main",
+			"traceOutputFile": "./src/gcd/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch Quicksort",
+			"request": "launch",
+			"mainClass": "quicksort.Main",
+			"traceOutputFile": "./src/quicksort/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch Swap",
+			"request": "launch",
+			"mainClass": "swap.Main",
+			"traceOutputFile": "./src/swap/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch Linear Search",
+			"request": "launch",
+			"mainClass": "linearSearch.Main",
+			"traceOutputFile": "./src/linearSearch/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch Arrays",
+			"request": "launch",
+			"mainClass": "arrays.Main",
+			"traceOutputFile": "./src/arrays/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch Objects",
+			"request": "launch",
+			"mainClass": "objects.Main",
+			"traceOutputFile": "./src/objects/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch Current File",
+			"request": "launch",
+			"mainClass": "${file}"
+		}
+	]
+}

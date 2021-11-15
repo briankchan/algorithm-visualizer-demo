@@ -1,0 +1,2 @@
+org.eclipse.jdt.core.compiler.problem.unusedLabel=ignore
+org.eclipse.jdt.core.compiler.problem.unusedLocal=info

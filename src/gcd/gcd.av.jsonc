@@ -1,0 +1,379 @@
+{
+  "traceFile": "./trace.json",
+  "frame": "gcd.Main:main",
+  "steps": [
+    {"label": "start", "pause": true},
+    {"label": "check", "pause": true},
+    {"label": "updateLeft", "pause": true},
+    {"label": "updateRight", "pause": true},
+    {"label": "end", "pause": true},
+    {"label": "pauseForMod", "pause": true},
+    {"label": "main", "pause": false},
+  ],
+  "views": [
+    {
+      "name": "globals",
+      "type": "html",
+      "display": "none",
+      "output": 21,
+      "bars": {
+        "expr": "max(b1, b2) / self.output",
+        "persist": true,
+      },
+      "conditions": [
+        {
+          "name": "left",
+          "if": {"expr": "inside(label,'updateLeft')"},
+          "then": {
+            "updatedVals": {"expr": "[c, a]"},
+          }
+        },
+        {
+          "name": "right",
+          "if": {"expr": "inside(label,'updateRight')"},
+          "then": {
+            "updatedVals": {"expr": "[a, c]"},
+          }
+        },
+        // convenience conditions
+        {
+          "name": "part1",
+          "if": {"expr": "inside(method, 'gcd.Main:part1')"}
+        },
+        {
+          "name": "part2",
+          "if": {"expr": "inside(method, 'gcd.Main:part2')"}
+        },
+        {
+          "name": "starting",
+          "if": {"expr": "inside(label, 'start') && !inside(label, 'loop')"}
+        },
+        {
+          "name": "checking",
+          "if": {"expr": "inside(label, 'check') && !self.updating"}
+        },
+        {
+          "name": "updateLeft",
+          "if": {"expr": "inside(label, 'updateLeft')"}
+        },
+        {
+          "name": "updateRight",
+          "if": {"expr": "inside(label, 'updateRight')"}
+        },
+        {
+          "name": "updating",
+          "if": {"expr": "self.updateLeft || self.updateRight"}
+        },
+      ]
+    },
+    {
+      "name": "wrapper",
+      "type": "html",
+      "height": "100%",
+      "alignItems": "stretch",
+      "justifyContent": "stretch",
+      "fontSize": 16,
+      "gap": "1em",
+      "paddingBlock": "0.5em",
+      "children": [
+        {
+          "name": "title",
+          "type": "text",
+          "fontSize": 24,
+          "content": "Finding a Greatest Common Divisor",
+        },
+        {
+          "name": "parts",
+          "type": "array",
+          "array": ["Part 1: The basic algorithm", "Part 2: An optimization"],
+          "elementConfig": {
+            "conditions": [
+              {
+                "name": "active",
+                "if": {"expr": "inside(method, 'gcd.Main:part' + (1+self.index))"},
+                "then": {
+                  "textDecoration": "underline",
+                  "opacity": 1,
+                }
+              },
+              {
+                "name": "inactive",
+                "if": {"expr": "!self.active"},
+                "then": {
+                  "textDecoration": "initial",
+                  "opacity": 0.5
+                }
+              }
+            ]
+          }
+        },
+        {
+          "name": "label",
+          "type": "text",
+          "content": {"expr": "'GCD of ' + originalA + ' and ' + originalB"},
+          "fontSize": 20,
+          "output": {"expr": "output"}
+        },
+        {
+          "name": "bars",
+          "type": "array",
+          "array": {"expr": "[a, b]"},
+          "alignItems": "stretch",
+          "flex": "1 1 0",
+          "elementConfig": {
+            "type": "array",
+            "array": [],
+            "maxSize": {"expr": "globals.bars + 2"},
+            "gap": 0,
+            "flexFlow": "column-reverse nowrap",
+            "justifyContent": "stretch",
+            "val": {"expr": "self.parentArray[self.index]"},
+            "barColor": {"expr": "self.index === 0 ? 'darkblue' : 'darkgreen'"},
+
+            "elementConfig": {
+              "fontSize": 20,
+              "minWidth": "20px",
+              "content": {"value": "", "expr": null},
+              "parentVal": {"expr": "self.parent.val"},
+              "val": {"expr": "self.index * globals.output"},
+
+              // stuff being animated by conditions
+              "borderColor": "transparent",
+              "border": "1px solid",
+              "background": "transparent",
+              // move being empty by default ensures that the 'moving' condition activating will cause a transition
+              "move": {
+                "value": "",
+                "transition": {
+                  "type": "tween"
+                }
+              },
+
+              "conditions": [
+                {
+                  "name": "isLeft",
+                  "if": {"expr": "self.parent.index === 0"}
+                },
+                {
+                  "name": "isNum",
+                  "if": {"expr": "self.index === globals.bars + 1"},
+                  "then": {
+                    "content": {"expr": "globals.updatedVals ? globals.updatedVals[self.parent.index] : self.parent.val"},
+                    "order": -1
+                  }
+                },
+                {
+                  "name": "isBar",
+                  "if": {"expr": "self.index * globals.output < self.parent.val"}
+                },
+                {
+                  "name": "showDiff",
+                  "if": {"expr": "inside(label, 'check') && !globals.updating"},
+                },
+                { // must be before updatedBar
+                  "name": "isOverlapBar",
+                  "if": {"expr": "self.showDiff && !self.isLeft && self.isBar && self.val < b-c"},
+                  "then": {
+                    "background": {"expr": "bars$0.barColor"},
+                  }
+                },
+                {
+                  "name": "updatedBar",
+                  "if": {"expr": "globals.updatedVals ? self.val < globals.updatedVals[self.parent.index] : self.isBar"},
+                  "then": {
+                    "background": {"expr": "self.parent.barColor"},
+                    "borderColor": "white",
+                  }
+                },
+                {
+                  "name": "isDiffNum",
+                  "if": {"expr": "self.showDiff && !self.isLeft && self.index === b / globals.output"},
+                },
+                {
+                  "if": {"expr": "self.isDiffNum && globals.part1"},
+                  "then": {
+                    "content": {"expr": "b + ' - ' + a + ' = ' + (b - a)"}
+                  }
+                },
+                { // must be before part2
+                  "if": {"expr": "self.isDiffNum && globals.part2 && originalB == b && !inside(label, 'pauseForMod')"},
+                  "then": {
+                    "content": {"expr": "b + ' - ' + a + ' - ' + a + ' - ...'"}
+                  }
+                },
+                {
+                  "if": {"expr": "self.isDiffNum && globals.part2"},
+                  "then": {
+                    "content": {"expr": "b + ' % ' + a + ' = ' + (b%a)"}
+                  }
+                },
+                { // bottom right bar always exits
+                  "name": "update_rightBar",
+                  "if": {"expr": "self.moving && !self.isLeft && self.val < b-c"},
+                  "then": {
+                    "move": {
+                      "transition": {
+                        "toLocation": {
+                          "x": "+500"
+                        }
+                      }
+                    }
+                  }
+                },
+                {// top right bar slides down
+                  "name": "updateRight_rightDiffBar",
+                  "if": {"expr": "self.moving && globals.updateRight && !self.isLeft && self.val >= b-c"},
+                  "then": {
+                    "move": {
+                      "transition": {
+                        "to": {"expr": "'bars$1$' + (self.index-(b-c)/globals.output)"}
+                      }
+                    }
+                  }
+                },
+                { // left bar does nothing
+                  "name": "updateRight_leftBar",
+                  "if": {"expr": "self.moving && globals.updateRight && self.isLeft"},
+                  "then": {
+                    "move": {
+                      "transition": {
+                        "type": "tween" // disables movement
+
+                      }
+                    }
+                  }
+                },
+                { // top right bar goes to left
+                  "name": "updateLeft_rightDiffBar",
+                  "if": {"expr": "self.moving && globals.updateLeft && !self.isLeft && self.val >= b-c"},
+                  "then": {
+                    "move": {
+                      "transition": {
+                        "to": {"expr": "'bars$0$' + (self.index-(b-c)/globals.output)"}
+                      }
+                    }
+                  }
+                },
+                { // left bar goes right
+                  "name": "updateLeft_leftBar",
+                  "if": {"expr": "self.moving && globals.updateLeft && self.isLeft"},
+                  "then": {
+                    "move": {
+                      "transition": {
+                        "to": {"expr": "'bars$1$' + (self.index)"}
+                      }
+                    }
+                  }
+                },
+
+                {
+                  "name": "moving",
+                  "if": {"expr": "globals.updating && self.isBar"},
+                  "then": {
+                    "move": {
+                      "expr": "{background: self.background, borderColor: self.borderColor}",
+                      "transition": {
+                        "type": "move",
+                      }
+                    }
+                  }
+                },
+
+                // part 2 animation changes
+                {
+                  "name": "overlapBarDelay",
+                  "if": {"expr": "self.isOverlapBar && globals.part2"},
+                  "then": {
+                    "background": {"transition": {
+                      "delay": {"expr": "floor(self.val / a) * 0.4"}
+                    }},
+                  }
+                },
+                {
+                  "name": "exitDelay",
+                  "if": {"expr": "self.update_rightBar && globals.part2"},
+                  "then": {
+                    "move": {"transition": {
+                      "delay": {"expr": "floor(self.val / a) * 0.2"}
+                    }},
+                  }
+                },
+                { // movement delay for parts not exiting
+                  "name": "otherMoveDelay",
+                  "if": {"expr": "self.moving && globals.part2"},
+                  "then": {
+                    "move": {"transition": {
+                      "delay": {"expr": "floor(b / a) * 0.2"},
+                      "end": {"expr": "floor(b / a) * 0.2 + 0.5"}
+                      // default tween duration is 0.5
+                    }},
+                  }
+                },
+                {
+                  "name": "bgAndBorderDelay",
+                  "if": {"expr": "self.moving && globals.part2"},
+                  "then": {
+                    // wait until after everything is done exiting for these
+                    "borderColor": {"transition": {
+                      "delay": {"expr": "floor(b / a) * 0.2"}
+                    }},
+                    "background": {"transition": {
+                      "delay": {"expr": "floor(b / a) * 0.2"}
+                    }},
+                  }
+                },
+              ]
+            }
+          }
+        },
+        {
+          "name": "caption",
+          "type": "text",
+          "content": "",
+          "height": "4em",
+          "conditions": [
+            // part 1
+            {
+            "if": {"expr": "globals.starting && globals.part1"},
+            "then": {"content": "We're looking for the GCD, which is the largest number that divides both values evenly."}
+            },
+            {
+            "if": {"expr": "globals.checking && globals.part1"},
+            "then": {"content": "We can see that since the GCD divides both values evenly, it must also divide their difference evenly."}
+            },
+            {
+            "if": {"expr": "globals.updating && globals.part1"},
+            "then": {"content": "Now, we can reduce the problem to one with smaller numbers."}
+            },
+            {
+            "if": {"expr": "inside(label, 'end') && globals.part1"},
+            "then": {"content": "Both numbers are the same, so the final GCD is just the number itself."}
+            },
+            // part 2
+            {
+              "if": {"expr": "globals.starting && globals.part2"},
+              "then": {"content": "But what happens if one number is much larger than the other?"}
+              },
+              {
+              "if": {"expr": "globals.checking && globals.part2 && b == originalB && !inside(label, 'pauseForMod')"},
+              "then": {"content": "The algorithm we've come up with will end up subtracting the smaller number from the larger one repeatedly, until the result is smaller..."}
+              },
+              {
+              "if": {"expr": "inside(label, 'pauseForMod')"},
+              "then": {"content": "This is actually the same as dividing and taking the remainder&mdash;the modulo operation."}
+              },
+              {
+              "if": {"expr": "globals.updating && globals.part2 && b == originalB"},
+              "then": {"content": "Now we can just find the GCD of the lesser value and the remainder."}
+              },
+              {
+              "if": {"expr": "inside(label, 'end') && globals.part2"},
+              "then": {"content": "Since the lesser number evenly divides the greater one, the lesser number is the GCD."}
+              },
+          ]
+        }
+      ]
+    }
+
+  ]
+}

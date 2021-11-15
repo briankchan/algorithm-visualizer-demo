@@ -1,0 +1,40 @@
+{
+	"traceFile": "./trace.json",
+	"frame": "swap.Main:main",
+	"steps": [
+		{"label": "before", "pause": true},
+		{"label": "swap", "side": "end", "pause": true},
+	],
+	"views": [
+		{
+			"name": "array",
+			"type": "array",
+			"array": {"expr": "arr"},
+			"margin": "60px",
+			"elementConfig": {
+				"fontSize": 20,
+				"content": {
+					"ifUndefined": "",
+					"persist": true,
+					"transition": {
+						"type": {"expr": "i === undefined ? 'slot' : 'swap'"},
+						"from": {"expr": "'array$' + i"},
+						"to": {"expr": "'array$' + (i+1)"},
+						"swing": 100
+					}
+				},
+				"borderColor": "transparent",
+				"border": "1px solid",
+				"conditions": [
+					{
+						"name": "swapping",
+						"if": {"expr": "i === self.index || i === self.index - 1"},
+						"then": {
+							"borderColor": "red"
+						}
+					}
+				]
+			}
+		}
+	]
+}

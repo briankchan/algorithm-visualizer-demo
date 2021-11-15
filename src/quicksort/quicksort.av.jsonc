@@ -1,0 +1,112 @@
+{
+	"traceFile": "./trace.json",
+	"frame": "quicksort.Main:main",
+	"steps": [
+		{"label": "callStart", "pause": true},
+		{"method": "partitionStart", "pause": true},
+		{"label": "checking"},
+		{"label": "swap", "side": "end"},
+		{"label": "pivotSwap", "side": "end", "pause": true},
+	],
+	"views": [
+		{
+			"name": "labels",
+			"type": "text",
+			"content": "Red indicates the start of the section currently being partitioned; green indicates the end.",
+			"fontSize": 20,
+		},
+		{
+			"name": "myArray",
+			"type": "array",
+			"array": {"expr": "arr"},
+			"margin": "60px",
+			"elementConfig": {
+				"fontSize": 20,
+				"background": "transparent",
+				"borderColor": "transparent",
+				"border": "1px solid",
+				"content": {"persist": true},
+				"conditions": [
+					{
+						"name": "low",
+						"if": {"expr": "self.index === begin"},
+						"then": {
+							"borderColor": "red"
+						}
+					},
+					{
+						"name": "high",
+						"if": {"expr": "self.index === end"},
+						"then": {
+							"borderColor": "green"
+						}
+					},
+					{
+						"name": "checking",
+						"if": {"expr": "inside(label, 'checking') && self.index === j"},
+						"then": {
+							"background": "rgba(127,127,127,0.5)"
+						}
+					},
+					{
+						"name": "swapping",
+						"if": {"expr": "inside(label, 'swap')"},
+						"then": {
+							"a": {"expr": "i"},
+							"b": {"expr": "j"}
+						}
+					},
+					{
+						"name": "pivotSwapping",
+						"if": {"expr": "inside(label, 'pivotSwap')"},
+						"then": {
+							"a": {"expr": "i"},
+							"b": {"expr": "end"},
+							"content": {
+								"transition": {
+									"delay": 0.5
+								}
+							}
+						}
+					},
+					{
+						"name": "anySwapping",
+						"if": {"expr": "self.swapping || self.pivotSwapping"},
+						"then": {
+							"content": {
+								"transition": {
+									"type": "swap",
+									"from": {"expr": "'myArray$'+self.a"},
+									"to": {"expr": "'myArray$'+self.b"},
+									"swing": 50
+								}
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			"name": "status",
+			"type": "text",
+			"content": "",
+			"fontSize": 20,
+			"conditions": [
+				{
+					"name": "partitioning",
+					"if": {"expr": "inside(label, 'partitionStart')"},
+					"then": {
+						"content": {"expr": "'current pivot value: ' + pivot"}
+					}
+				},
+				{
+					"name": "partitionEnd",
+					"if": {"expr": "inside(label, 'pivotSwap')"},
+					"then": {
+						"content": "done partitioning; now swapping pivot into place"
+					}
+				}
+			]
+		}
+	]
+}

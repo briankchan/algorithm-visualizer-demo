@@ -1,0 +1,52 @@
+{
+	"traceFile": "./trace.json",
+	"frame": "linearSearch.Main:linearSearch",
+	"steps": [
+		{"label": "check", "pause": true},
+		{"label": "found", "pause": true},
+		{"label": "notfound", "pause": true},
+	],
+	"views": [
+		{
+			"name": "wrapper",
+			"type": "html",
+			"fontSize": 20,
+			"position": "relative",
+			"margin": "2em",
+			"children": [
+				{
+					"name": "array",
+					"type": "array",
+					"array": {"expr": "arr"},
+					"elementConfig": {
+						"color": "white",
+						"conditions": [
+							{
+								"if": {"expr": "i == self.index"},
+								"then": {"color": "red"}
+							}
+						]
+					}
+				},
+				{
+					"name": "marker",
+					"type": "html",
+					"position": "absolute",
+					"top": 0,
+					"width": {"expr": "(100 / arr.length) + '%'"},
+					"xPercent": {"expr": "100 * (i ?? arr.length-1)"}, // percent of own width
+					"height": "100%",
+					"border": "1px solid",
+					"autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
+				},
+			]
+		},
+
+		{
+			"name": "text",
+			"type": "text",
+			"content": {"expr": "'currently checking index ' + (i ?? arr.length-1)"},
+			"autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
+		}
+	]
+}
