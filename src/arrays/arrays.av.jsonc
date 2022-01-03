@@ -6,7 +6,7 @@
 		{"label": "decrease", "pause": true, "side": "end"},
 		{"label": "increment", "side": "end"},
 		{"label": "incAll", "pause": true, "side": "end"},
-		{"label": "replace", "pause": true, "side": "end"},
+		{"label": "replace", "pause": true, "side": "end"}
 	],
 	"views": [
 		{

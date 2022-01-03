@@ -6,14 +6,14 @@
 		{"method": "partitionStart", "pause": true},
 		{"label": "checking"},
 		{"label": "swap", "side": "end"},
-		{"label": "pivotSwap", "side": "end", "pause": true},
+		{"label": "pivotSwap", "side": "end", "pause": true}
 	],
 	"views": [
 		{
 			"name": "labels",
 			"type": "text",
 			"content": "Red indicates the start of the section currently being partitioned; green indicates the end.",
-			"fontSize": 20,
+			"fontSize": 20
 		},
 		{
 			"name": "myArray",

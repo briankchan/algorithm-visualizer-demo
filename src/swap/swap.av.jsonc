@@ -3,7 +3,7 @@
 	"frame": "swap.Main:main",
 	"steps": [
 		{"label": "before", "pause": true},
-		{"label": "swap", "side": "end", "pause": true},
+		{"label": "swap", "side": "end", "pause": true}
 	],
 	"views": [
 		{

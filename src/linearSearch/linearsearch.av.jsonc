@@ -4,7 +4,7 @@
 	"steps": [
 		{"label": "check", "pause": true},
 		{"label": "found", "pause": true},
-		{"label": "notfound", "pause": true},
+		{"label": "notfound", "pause": true}
 	],
 	"views": [
 		{
@@ -38,7 +38,7 @@
 					"height": "100%",
 					"border": "1px solid",
 					"autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
-				},
+				}
 			]
 		},
 

@@ -9,7 +9,7 @@
     {"label": "tooSmall", "pause": {"expr": "prevOp != 'tooSmall'"}},
     {"label": "tooSmall", "side": "end", "pause": true},
     {"label": "tooBig", "pause": true},
-    {"label": "tooBig", "side": "end", "pause": true},
+    {"label": "tooBig", "side": "end", "pause": true}
   ],
   "views": [
     {
@@ -28,14 +28,14 @@
       "tooBigAssign": {"expr": "inside(label, 'tooBig') && self.assign"},
       "tooSmallAssign": {"expr": "inside(label, 'tooSmall') && self.assign"},
       "tooBigCheck": {"expr": "inside(label, 'tooBig') && !self.assign"},
-      "tooSmallCheck": {"expr": "inside(label, 'tooSmall') && !self.assign"},
+      "tooSmallCheck": {"expr": "inside(label, 'tooSmall') && !self.assign"}
     },
     {
       "name": "title",
       "type": "text",
       "content": {"expr": "'Searching for a subarray with sum ' + target"},
       "fontSize": 20,
-      "marginBlock": {"expr": "globals.spacing"},
+      "marginBlock": {"expr": "globals.spacing"}
     },
     {
       "name": "numbers",
@@ -69,7 +69,7 @@
             "then": {
               "background": "linear-gradient(to right, transparent 0, rgba(127,127,127,0.5) 0, transparent 0)"
             }
-          },
+          }
         ]
       }
     },
@@ -109,7 +109,7 @@
                 "transition": {
                   "type": "swap",
                   "from": {"expr": "'arrows$' + first"},
-                  "to": {"expr": "'arrows$' + (first-1)"},
+                  "to": {"expr": "'arrows$' + (first-1)"}
                 }
               }
             }
@@ -121,7 +121,7 @@
                 "transition": {
                   "type": "swap",
                   "from": {"expr": "'arrows$' + last"},
-                  "to": {"expr": "'arrows$' + (last-1)"},
+                  "to": {"expr": "'arrows$' + (last-1)"}
                 }
               }
             }
@@ -183,7 +183,7 @@
           "then": {
             "content": "The sum matches, so we've found the array we're looking for!"
           }
-        },
+        }
       ]
     },
     {
@@ -200,7 +200,7 @@
           "then": {
             "content": {"expr": "'Next, we\\'ll consider subarrays that start at index ' + first + '.'"}
           }
-        },
+        }
       ]
     },
     {
@@ -212,7 +212,7 @@
         ["tooSmallCheck", "\tif current sum is too small:"],
         ["tooSmallAssign", "\t\tincrement end"],
         ["tooBigCheck", "\tif current sum is too large:"],
-        ["tooBigAssign", "\t\tincrement start"],
+        ["tooBigAssign", "\t\tincrement start"]
       ],
       "fontFamily": "var(--vscode-editor-font-family)",
       "flexFlow": "column wrap", // must wrap for alignContent to work

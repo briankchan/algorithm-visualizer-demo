@@ -8,7 +8,7 @@
     {"label": "updateRight", "pause": true},
     {"label": "end", "pause": true},
     {"label": "pauseForMod", "pause": true},
-    {"label": "main", "pause": false},
+    {"label": "main", "pause": false}
   ],
   "views": [
     {
@@ -18,21 +18,21 @@
       "output": 21,
       "bars": {
         "expr": "max(b1, b2) / self.output",
-        "persist": true,
+        "persist": true
       },
       "conditions": [
         {
           "name": "left",
           "if": {"expr": "inside(label,'updateLeft')"},
           "then": {
-            "updatedVals": {"expr": "[c, a]"},
+            "updatedVals": {"expr": "[c, a]"}
           }
         },
         {
           "name": "right",
           "if": {"expr": "inside(label,'updateRight')"},
           "then": {
-            "updatedVals": {"expr": "[a, c]"},
+            "updatedVals": {"expr": "[a, c]"}
           }
         },
         // convenience conditions
@@ -63,7 +63,7 @@
         {
           "name": "updating",
           "if": {"expr": "self.updateLeft || self.updateRight"}
-        },
+        }
       ]
     },
     {
@@ -80,7 +80,7 @@
           "name": "title",
           "type": "text",
           "fontSize": 24,
-          "content": "Finding a Greatest Common Divisor",
+          "content": "Finding a Greatest Common Divisor"
         },
         {
           "name": "parts",
@@ -93,7 +93,7 @@
                 "if": {"expr": "inside(method, 'gcd.Main:part' + (1+self.index))"},
                 "then": {
                   "textDecoration": "underline",
-                  "opacity": 1,
+                  "opacity": 1
                 }
               },
               {
@@ -168,13 +168,13 @@
                 },
                 {
                   "name": "showDiff",
-                  "if": {"expr": "inside(label, 'check') && !globals.updating"},
+                  "if": {"expr": "inside(label, 'check') && !globals.updating"}
                 },
                 { // must be before updatedBar
                   "name": "isOverlapBar",
                   "if": {"expr": "self.showDiff && !self.isLeft && self.isBar && self.val < b-c"},
                   "then": {
-                    "background": {"expr": "bars$0.barColor"},
+                    "background": {"expr": "bars$0.barColor"}
                   }
                 },
                 {
@@ -182,12 +182,12 @@
                   "if": {"expr": "globals.updatedVals ? self.val < globals.updatedVals[self.parent.index] : self.isBar"},
                   "then": {
                     "background": {"expr": "self.parent.barColor"},
-                    "borderColor": "white",
+                    "borderColor": "white"
                   }
                 },
                 {
                   "name": "isDiffNum",
-                  "if": {"expr": "self.showDiff && !self.isLeft && self.index === b / globals.output"},
+                  "if": {"expr": "self.showDiff && !self.isLeft && self.index === b / globals.output"}
                 },
                 {
                   "if": {"expr": "self.isDiffNum && globals.part1"},
@@ -273,7 +273,7 @@
                     "move": {
                       "expr": "{background: self.background, borderColor: self.borderColor}",
                       "transition": {
-                        "type": "move",
+                        "type": "move"
                       }
                     }
                   }
@@ -286,7 +286,7 @@
                   "then": {
                     "background": {"transition": {
                       "delay": {"expr": "floor(self.val / a) * 0.4"}
-                    }},
+                    }}
                   }
                 },
                 {
@@ -295,7 +295,7 @@
                   "then": {
                     "move": {"transition": {
                       "delay": {"expr": "floor(self.val / a) * 0.2"}
-                    }},
+                    }}
                   }
                 },
                 { // movement delay for parts not exiting
@@ -306,7 +306,7 @@
                       "delay": {"expr": "floor(b / a) * 0.2"},
                       "end": {"expr": "floor(b / a) * 0.2 + 0.5"}
                       // default tween duration is 0.5
-                    }},
+                    }}
                   }
                 },
                 {
@@ -319,9 +319,9 @@
                     }},
                     "background": {"transition": {
                       "delay": {"expr": "floor(b / a) * 0.2"}
-                    }},
+                    }}
                   }
-                },
+                }
               ]
             }
           }
@@ -369,7 +369,7 @@
               {
               "if": {"expr": "inside(label, 'end') && globals.part2"},
               "then": {"content": "Since the lesser number evenly divides the greater one, the lesser number is the GCD."}
-              },
+              }
           ]
         }
       ]
