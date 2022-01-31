@@ -1,6 +1,6 @@
 {
   "traceFile": "./trace.json",
-  "frame": "gcd.Main:main",
+  "frame": "av99_gcd.GCD:main",
   "steps": [
     {"label": "start", "pause": true},
     {"label": "check", "pause": true},

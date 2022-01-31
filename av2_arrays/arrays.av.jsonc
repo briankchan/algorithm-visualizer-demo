@@ -1,0 +1,32 @@
+// Of course, there's not too much we can do with just variables; this example introduces arrays.
+{
+	"traceFile": "./trace.json",
+	"frame": "av2_arrays.Arrays:main",
+	"steps": [
+		{"label": "increment", "side": "end", "pause": true}
+	],
+	"views": [
+		{
+			// This is an array view, which is usually used to display an array of values.
+			"type": "array",
+
+			// The `array` property specifies the array to display;
+			// usually, this will be an expression, but JSON array literals are supported too.
+			"array": {"expr": "numbers"},
+			"margin": "60px",
+
+			// The `elementConfig` property is special: it defines values for properties on the
+			// array's elements.
+			// Each element of the array will get its own view with these properties.
+			// (There are some additional default properties, e.g., `type` is `text`,
+			// and `content` is the value at the index in the array.)
+			"elementConfig": {
+				"fontSize": 20,
+				"borderColor": "white",
+				"border": "1px solid",
+				"overflow": "hidden",
+				"color": {"expr": "i == self.index ? 'red' : 'white'"}
+			}
+		}
+	]
+}

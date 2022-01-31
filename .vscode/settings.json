@@ -6,7 +6,7 @@
 		"**/.factorypath": true
 	},
 	"java.project.sourcePaths": [
-		"src"
+		"."
 	],
 	"java.settings.url": "./org.eclipse.jdt.core.prefs"
 }

@@ -1,6 +1,6 @@
-package linearSearch;
+package av3_conditions;
 
-public class Main {
+public class LinearSearch {
 	public static void main(String[] args) {
 		linearSearch(new int[]{5, 12, 100}, 7);
 	}

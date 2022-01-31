@@ -1,9 +1,9 @@
-package gcd;
+package av99_gcd;
 
 /**
  * Main
  */
-public class Main {
+public class GCD {
 
 	public static void main(String[] args) {
 		int a1 = 105;

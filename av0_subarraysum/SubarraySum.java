@@ -1,6 +1,6 @@
-package subarraysum;
+package av0_subarraysum;
 
-public class Main {
+public class SubarraySum {
 
 	/**
 	 * @param arr must be an array of non-negative integers

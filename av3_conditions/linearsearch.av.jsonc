@@ -1,3 +1,7 @@
+/*
+Now for our first non-trivial example, along with an introduction
+to *conditions*, which can make it easier to script text descriptions.
+*/
 {
 	"traceFile": "./trace.json",
 	"frame": "linearSearch.Main:linearSearch",
@@ -9,6 +13,8 @@
 	"views": [
 		{
 			"name": "wrapper",
+			// The `html` view type is just a <div> that holds child views.
+			// It's used here to position the "box" view on top of the "array" view
 			"type": "html",
 			"fontSize": 20,
 			"position": "relative",
@@ -29,11 +35,12 @@
 					}
 				},
 				{
-					"name": "marker",
+					"name": "box",
 					"type": "html",
 					"position": "absolute",
 					"top": 0,
 					"width": {"expr": "(100 / arr.length) + '%'"},
+					// use a CSS transform to move the "current" box
 					"xPercent": {"expr": "100 * (i ?? arr.length-1)"}, // percent of own width
 					"height": "100%",
 					"border": "1px solid",
@@ -45,8 +52,25 @@
 		{
 			"name": "text",
 			"type": "text",
-			"content": {"expr": "'currently checking index ' + (i ?? arr.length-1)"},
-			"autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
+			"conditions": [
+				{
+					"if": {"expr": "inside(label, 'check')"},
+					"then": {"content": {"expr": "'currently checking index ' + i"}}
+				},
+				{
+					"if": {"expr": "inside(label, 'found')"},
+					"then": {"content": {"expr": "target + ' found at index ' + i"}}
+				},
+				{
+					"if": {"expr": "inside(label, 'notfound')"},
+					"then": {"content": {"expr": "target + ' not found'"}}
+				}
+			],
+			/*
+			This line exists to prevent `content` from becoming undefined
+			on the last step (at the end of the method).
+			*/
+			"content": {"persist": true}
 		}
 	]
 }

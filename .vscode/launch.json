@@ -6,52 +6,59 @@
 	"configurations": [
 		{
 			"type": "java",
-			"name": "Launch Subarray Sum",
+			"name": "Launch Main",
 			"request": "launch",
-			"mainClass": "subarraysum.Main",
-			"traceOutputFile": "./src/subarraysum/trace.json"
+			"mainClass": "av2_arrays.Main",
+			"projectName": "algorithm-visualizer-demo_df5f5e3c"
 		},
 		{
 			"type": "java",
-			"name": "Launch GCD",
+			"name": "Launch AV0: Subarray Sum",
 			"request": "launch",
-			"mainClass": "gcd.Main",
-			"traceOutputFile": "./src/gcd/trace.json"
+			"mainClass": "av0_subarraysum.SubarraySum",
+			"traceOutputFile": "./av0_subarraysum/trace.json"
 		},
 		{
 			"type": "java",
-			"name": "Launch Quicksort",
+			"name": "Launch AV1: Basics",
 			"request": "launch",
-			"mainClass": "quicksort.Main",
-			"traceOutputFile": "./src/quicksort/trace.json"
+			"mainClass": "av1_basics.Basics",
+			"traceOutputFile": "./av1_basics/trace.json"
 		},
 		{
 			"type": "java",
-			"name": "Launch Swap",
+			"name": "Launch AV2: Arrays",
 			"request": "launch",
-			"mainClass": "swap.Main",
-			"traceOutputFile": "./src/swap/trace.json"
+			"mainClass": "av2_arrays.Arrays",
+			"traceOutputFile": "./av2_arrays/trace.json"
 		},
 		{
 			"type": "java",
-			"name": "Launch Linear Search",
+			"name": "Launch AV3: Conditions",
 			"request": "launch",
-			"mainClass": "linearSearch.Main",
-			"traceOutputFile": "./src/linearSearch/trace.json"
+			"mainClass": "av3_conditions.LinearSearch",
+			"traceOutputFile": "./av3_conditions/trace.json"
 		},
 		{
 			"type": "java",
-			"name": "Launch Arrays",
+			"name": "Launch AV4: Transitions",
 			"request": "launch",
-			"mainClass": "arrays.Main",
-			"traceOutputFile": "./src/arrays/trace.json"
+			"mainClass": "av4_transitions.Transitions",
+			"traceOutputFile": "./av4_transitions/trace.json"
 		},
 		{
 			"type": "java",
-			"name": "Launch Objects",
+			"name": "Launch AV99: GCD",
 			"request": "launch",
-			"mainClass": "objects.Main",
-			"traceOutputFile": "./src/objects/trace.json"
+			"mainClass": "av99_gcd.GCD",
+			"traceOutputFile": "./av99_gcd/trace.json"
+		},
+		{
+			"type": "java",
+			"name": "Launch testing",
+			"request": "launch",
+			"mainClass": "objects.HashMap",
+			"traceOutputFile": "./objects/trace.json"
 		},
 		{
 			"type": "java",

@@ -1,6 +1,21 @@
+/*
+Let's start with a complex example to demonstrate what the system can do.
+
+There's no need to understand what's going on in this file,
+even after reading through the following examples--but hopefully it shows
+that it's possible to make interesting visualizations with this basic
+research prototype.
+
+Algorithm intro: the algorithm solves the subarray sum problem--given
+an array of numbers and a target sum, find a subarray of numbers that
+sum to the target. (A subarray is a contiguous subset of the array.)
+
+Visualization goal: this visualization tries to briefly justify the
+steps taken by the algorithm.
+*/
 {
   "traceFile": "./trace.json",
-  "frame": "subarraysum.Main:findSubarraySum",
+  "frame": "av0_subarraysum.SubarraySum:findSubarraySum",
   "steps": [
     {"label": "start", "pause": true},
     {"label": "loop", "pause": true},
@@ -17,9 +32,10 @@
       "type": "html",
       "display": "none",
 
+      // define spacing for views to use between each other
       "spacing": "1em",
 
-      // labels
+      // convenience properties for timing (mostly for pseudocode highlighting)
       "assign": {"expr": "iterationFirst !== first || iterationLast !== last"},
 
       "start": {"expr": "inside(label, 'start')"},
@@ -168,13 +184,13 @@
           "if": {"expr": "inside(label, 'tooSmall')"},
           "then": {
             "content": "This is too small, so we'll expand the subarray to the right."
-          }
+          } // TODO justify why you can't expand left (after the first shrink)
         },
         {
           "name": "tooBig",
           "if": {"expr": "inside(label, 'tooBig')"},
           "then": {
-            "content": {"expr": "'Now this is too big. Expanding the array on the right will only make this worse, but shrinking it from the right will make the sum too small... Thus, we can conclude that the item at index ' + iterationFirst + ' can never be included in the sum, and we must shrink the subarray from the left.'"}
+            "content": {"expr": "'Now this is too big. Expanding the array on the right will only make this worse, but shrinking it from the right will make the sum too small... Thus, we can conclude that the item at index ' + iterationFirst + ' can never be included in the sum, and we must shrink the subarray from the left.'"} // "if we shrink the right side, we'll get something we've already tried"  1 1 1 5 "or something smaller than what we've already tried"
           }
         },
         {
@@ -220,7 +236,6 @@
       "alignContent": "center",
       "tabSize": 4,
       "elementConfig": {
-        "item": {"expr": "self.parent.array[self.index]"},
         "content": {"expr": "self.item[1]"},
         "background": "transparent",
         "whiteSpace": "pre",
