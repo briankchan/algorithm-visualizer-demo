@@ -1,10 +1,9 @@
 /*
 Let's start with a complex example to demonstrate what the system can do.
 
-There's no need to understand what's going on in this file,
-even after reading through the following examples--but hopefully it shows
-that it's possible to make interesting visualizations with this basic
-research prototype.
+There's no need to understand what's going on in this file, but
+hopefully it shows that it's possible to make interesting visualizations
+with this basic research prototype.
 
 Algorithm intro: the algorithm solves the subarray sum problem--given
 an array of numbers and a target sum, find a subarray of numbers that
@@ -12,6 +11,15 @@ sum to the target. (A subarray is a contiguous subset of the array.)
 
 Visualization goal: this visualization tries to briefly justify the
 steps taken by the algorithm.
+(It ends up using probably too much text to do so, though.)
+
+The view the visualization, click the "Preview Algorithm Visualization" button
+('play' icon) at the top right of this file editor tab.
+This will open the preview panel to the right, where you can use the 'Next Step'
+and 'Previous Step' buttons to step through the visualization.
+
+Once you're done, move on to the next visualization (`av1_basics`).
+Don't bother trying to read the rest of this file.
 */
 {
   "traceFile": "./trace.json",
@@ -64,7 +72,7 @@ steps taken by the algorithm.
         "fontSize": 20,
         "content": {"persist": true},
         "border": "1px solid",
-        "conditions": [
+        "conditions": [ // use gradients to transition highlighting nicely
           {
             "name": "current",
             "if": {"expr": "self.index >= first && self.index < last"},
@@ -243,7 +251,7 @@ steps taken by the algorithm.
           {
             "if": {"expr": "globals[self.item[0]]"},
             "then": {
-              "background": "gray"
+              "background": "dimgray"
             }
           }
         ]

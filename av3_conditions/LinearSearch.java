@@ -2,7 +2,7 @@ package av3_conditions;
 
 public class LinearSearch {
 	public static void main(String[] args) {
-		linearSearch(new int[]{5, 12, 100}, 7);
+		linearSearch(new int[]{5, 12, 100, 3, 7, 10}, 7);
 	}
 
 	private static int linearSearch(int[] arr, int target) {

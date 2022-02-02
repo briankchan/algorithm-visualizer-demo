@@ -1,11 +1,31 @@
 # Algorithm Visualizer Demo
 
-Welcome to the in-browser algorithm visualizer demo!
+Welcome to browser-based demo of Brian's algorithm visualizer!
+
+This demo will introduce the visualization system through a series of example visualizations.
+
+You can view (and edit) the example visualizations by opening the various `.av.jsonc` files in the folders displayed in the file explorer to the left.
+These files have explanatory comments that will make the most sense if you read through the files in numerical order (and also finish reading this README file first).
+
+
+
+
+
+
+
+
+
+## Introduction
+
+Normally, the system can be used to create visualizations in 4ish steps:
+
+1. Write code for an algorithm in Java.
+2. Add Java labels to the code and use them to specify which "steps" to display in the visualization.
+3. Choose what variables from the Java code to display in the visualization.
+4. Configure display properties (e.g., colors, font size) and any transitions between steps.
 
 The full version of the visualizer currently runs as an extension to the Visual Studio Code (VSCode) text editor; this online demo uses a modified version of VSCode that can run in browsers and supports part of the visualizer extension's functionality.
-
-You can view and modify the example visualizations by opening the various `.av.jsonc` files in the folders displayed in the file explorer to the left.
-These files have explanatory comments that will make the most sense if you read through the files in numerical order.
+Specifically, visualizations can be edited and previewed, but
 
 ## Notes
 

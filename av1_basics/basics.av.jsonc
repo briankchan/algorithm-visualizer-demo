@@ -1,95 +1,105 @@
 // This is a simpler example that we can use to explain the basics of the visualizer.
 {
-	/*
-	This next line sets the trace file that this visualization will be animating.
-	The visualizer works by replayng the events recorded in this trace file.
-	The trace file needs to be generated before the visualization can run;
-	unfortunately, this browser-based demo cannot generate trace files,
-	so pre-generated traces are included instead.
-	*/
-	"traceFile": "./trace.json",
+  /*
+  This first line sets the trace file that this visualization will be animating.
+  The visualizer works by replayng the events recorded in this trace file.
+  The trace file needs to be generated before the visualization can run;
+  unfortunately, this browser-based demo cannot generate trace files,
+  so pre-generated traces are included instead.
+  */
+  "traceFile": "./trace.json",
 
-	/*
-	This line specifies the root method that we want to visualize.
-	(It's possible to visualize the methods called by the root method as well.)
-	*/
-	"frame": "av1_basics.Basics:main",
+  /*
+  This line specifies the root method that we want to visualize.
+  (It's possible to visualize the methods called by the root method as well.)
+  */
+  "frame": "av1_basics.Basics:main",
 
-	/*
-	Now is a good time to open the `Main.java` file in this directory.
-	If your screen is large enough, it may be easiest to drag the tab into its own tab group
-	below or beside this one so that you can view both files simultaneously.
-	*/
+  /*
+  Now is a good time to open the `Main.java` file in this directory.
+  If your screen is large enough, it may be easiest to drag the tab into its own tab group
+  below or beside this one so that you can view both files simultaneously.
+  */
 
-	/*
-	This property determines when "steps" occur in the visualization
-	(i.e., when viewers need to press "Next step").
-	*/
-	"steps": [
-		/*
-		Here, we have a step that refers to a label in the Java code.
-		In particular, this creates a step right before each time
-		the program execution reaches line 13 of `Basics.java`.
+  /*
+  This property determines when "steps" occur in the visualization
+  (i.e., when viewers need to press "Next step").
+  */
+  "steps": [
+    /*
+    Here, we have a step that refers to a label in the Java code.
+    In particular, this creates a step right before each time
+    the program execution reaches line 13 of `Basics.java`.
 
-		Labels are the primary way to specify steps in the visualizer,
-		but we'll see another timing-related use for them later.
-		*/
-		{"label": "multiply", "side": "start", "pause": true}
-	],
-	// Note: there's always an implicit step at the end of the root method.
+    Labels are the primary way to specify steps in the visualizer,
+    but we'll see another timing-related use for them later.
+    */
+    {"label": "multiply", "side": "start", "pause": true}
+  ],
+  // Note: there's always an implicit step at the end of the root method.
 
-	/*
-	The `views` array determines what gets displayed in the visualization at each step.
-	Views are defined declaratively, with the ability to use *expressions* that
-	reference variables from the Java code.
-	As the visualization plays, these expressions will update dynamically
-	to reflect changes in the program state.
-	*/
-	"views": [
-		// First, a static view that doesn't use any expressions.
-		{
-			// Text views display text.
-			"type": "text",
+  /*
+  The `views` array determines what gets displayed in the visualization at each step.
+  Views are defined declaratively, with the ability to use *expressions* that
+  reference variables from the Java code.
+  As the visualization plays, these expressions will update dynamically
+  to reflect changes in the program state.
+  */
+  "views": [
+    // First, a static view that doesn't use any expressions.
+    {
+      // Text views display text.
+      "type": "text",
 
-			// The text displayed is set by this `content` property.
-			"content": "The number:",
+      // The text displayed is set by this `content` property.
+      "content": "The number:",
 
-			/*
-			These other properties are CSS properties used to style the text view.
-			The visualizer should support any valid CSS property
-			(but make sure to capitalize using camelCase).
-			*/
-			"margin": "60px",
-			"fontSize": "24px",
-			"fontWeight": "bold"
-		},
-		{
-			"type": "text",
+      /*
+      These other properties are CSS properties used to style the text view.
+      The visualizer should support any valid CSS property
+      (but make sure to capitalize using camelCase).
+      */
+      "margin": "60px",
+      "fontSize": "24px",
+      "fontWeight": "bold"
+    },
+    {
+      "type": "text",
 
-			// Often, text views use an *expression* to display a value from the trace.
-			"content": {"expr": "number"},
-			// By default, when the property's value changes, the visualization uses a
-			// "rolling up" animation to update the value displayed.
+      // Often, text views use an *expression* to display a value from the trace.
+      "content": {"expr": "number"},
+      // By default, when the property's value changes, the visualization uses a
+      // "rolling up" animation to update the value displayed.
 
-			// Some more static CSS properties.
-			"margin": "60px",
-			"height": "250px",
-			"border": "1px solid gray",
-			"overflow": "hidden",
+      // Some more static CSS properties.
+      "margin": "60px",
+      "height": "250px",
+      "border": "1px solid gray",
+      "overflow": "hidden",
 
-			// This next CSS property is set by another expression, making the font size
-			// increase as the displayed number increases.
-			"fontSize": {"expr": "number + 10"},
+      // This next CSS property is set by another expression, making the font size
+      // increase as the displayed number increases.
+      "fontSize": {"expr": "number + 10"},
 
-			// Expressions can use a subset of JavaScript.
-			"color": {"expr": "number > 100 ? 'red' : 'white'"},
+      // Expressions can use a subset of JavaScript.
+      "color": {"expr": "number > 100 ? 'red' : 'white'"},
 
-			// Expressions can also refer to other properties on the view.
-			"myOpacity": 0.5,
-			"myBrightness": {"expr": "255 / 2"},
-			"background": {"expr": "rgb(self.myBrightness,self.myBrightness,self.myBrightness,self.myOpacity)"}
-			/* Expressions also have access to a handful of special functions.
-			They won't be listed in this demo, though, since they're not important to the research. */
-		}
-	]
+      // Expressions can also refer to other properties on the view.
+      "myOpacity": 0.5,
+      "myBrightness": {"expr": "255 / 2"},
+      "background": {"expr": "rgb(self.myBrightness,self.myBrightness,self.myBrightness,self.myOpacity)"}
+      /* Expressions also have access to a handful of special functions, such as `rgb` used here.
+      They won't be listed in this demo, though, since they're not important to the research. */
+    }
+  ]
 }
+/*
+Finally, note that you can edit this file and click the Preview button (play icon)
+again to view the effects of your changes.
+E.g., you can try changing the text `color` so that it uses the `rgb` function
+to gradually turn more red on each step, depending on the value of `number`.
+
+Note: if your changes cause errors, the preview panel will stop responding and
+the error will be logged to the browser console, but there won't be any notification
+in the main UI.
+*/

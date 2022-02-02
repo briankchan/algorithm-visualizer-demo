@@ -11,6 +11,7 @@ public class SubarraySum {
 		int first = 0;
 		int currSum = arr[first];
 
+		// This file uses some extra variables to store data for the visualization.
 		String prevOp = "";
 
 		loop:

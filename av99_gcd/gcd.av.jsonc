@@ -1,3 +1,13 @@
+/*
+And now, for one last complex example: Euclid's algorithm for
+calculating the greatest common divisor of two integers.
+
+This isn't really a "computer science" algorithm, but we can
+still visualize it (and hopefully a fairly intuitive way, too).
+
+Once again, don't bother reading the rest of this file;
+just check out the fancy things happening in the preview.
+*/
 {
   "traceFile": "./trace.json",
   "frame": "av99_gcd.GCD:main",
@@ -38,11 +48,11 @@
         // convenience conditions
         {
           "name": "part1",
-          "if": {"expr": "inside(method, 'gcd.Main:part1')"}
+          "if": {"expr": "inside(method, 'av99_gcd.GCD:part1')"}
         },
         {
           "name": "part2",
-          "if": {"expr": "inside(method, 'gcd.Main:part2')"}
+          "if": {"expr": "inside(method, 'av99_gcd.GCD:part2')"}
         },
         {
           "name": "starting",
@@ -90,7 +100,7 @@
             "conditions": [
               {
                 "name": "active",
-                "if": {"expr": "inside(method, 'gcd.Main:part' + (1+self.index))"},
+                "if": {"expr": "inside(method, 'av99_gcd.GCD:part' + (1+self.index))"},
                 "then": {
                   "textDecoration": "underline",
                   "opacity": 1
@@ -150,6 +160,7 @@
               },
 
               "conditions": [
+                // convenience conditions
                 {
                   "name": "isLeft",
                   "if": {"expr": "self.parent.index === 0"}
@@ -170,6 +181,8 @@
                   "name": "showDiff",
                   "if": {"expr": "inside(label, 'check') && !globals.updating"}
                 },
+
+                // colors for left/right bars
                 { // must be before updatedBar
                   "name": "isOverlapBar",
                   "if": {"expr": "self.showDiff && !self.isLeft && self.isBar && self.val < b-c"},
@@ -185,6 +198,8 @@
                     "borderColor": "white"
                   }
                 },
+
+                // labels at the top of each bar
                 {
                   "name": "isDiffNum",
                   "if": {"expr": "self.showDiff && !self.isLeft && self.index === b / globals.output"}
@@ -207,6 +222,8 @@
                     "content": {"expr": "b + ' % ' + a + ' = ' + (b%a)"}
                   }
                 },
+
+                // transitions for bars moving
                 { // bottom right bar always exits
                   "name": "update_rightBar",
                   "if": {"expr": "self.moving && !self.isLeft && self.val < b-c"},

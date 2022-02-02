@@ -1,10 +1,10 @@
 /*
-Now for our first non-trivial example, along with an introduction
-to *conditions*, which can make it easier to script text descriptions.
+Now for our first non-trivial example, along with an introduction to *conditions*,
+which can make it easier to define complex behaviors or scripted text.
 */
 {
 	"traceFile": "./trace.json",
-	"frame": "linearSearch.Main:linearSearch",
+	"frame": "av3_conditions.LinearSearch:linearSearch",
 	"steps": [
 		{"label": "check", "pause": true},
 		{"label": "found", "pause": true},
@@ -12,38 +12,56 @@ to *conditions*, which can make it easier to script text descriptions.
 	],
 	"views": [
 		{
-			"name": "wrapper",
 			// The `html` view type is just a <div> that holds child views.
-			// It's used here to position the "box" view on top of the "array" view
 			"type": "html",
-			"fontSize": 20,
+			"height": 50,
 			"position": "relative",
 			"margin": "2em",
-			"children": [
+			"children": [ // These are the child views that produce the visible content.
 				{
-					"name": "array",
+					"name": "array", // the numbers
 					"type": "array",
 					"array": {"expr": "arr"},
+					"height": "100%",
 					"elementConfig": {
 						"color": "white",
+						"fontSize": 20,
+
+						/*
+						Here, we see a basic application of conditions.
+
+						Instead of using a ternary conditional operator
+						(`boolean ? ifTrue : ifFalse`), we can separate the ifTrue
+						value from the ifFalse value (the default).
+
+						This also allows us to set multiple values using the same
+						boolean check.
+						E.g., try setting the fontSize of the current item to 30.
+						*/
 						"conditions": [
 							{
 								"if": {"expr": "i == self.index"},
-								"then": {"color": "red"}
+								"then": {
+									"color": "red"
+								}
 							}
 						]
 					}
 				},
 				{
+					/*
+					This view defines the rectangle around the current item.
+					Feel free to skip to the last view; there's nothing important here.
+					*/
 					"name": "box",
 					"type": "html",
-					"position": "absolute",
+					"position": "absolute", // (used to place over the numbers)
 					"top": 0,
 					"width": {"expr": "(100 / arr.length) + '%'"},
-					// use a CSS transform to move the "current" box
-					"xPercent": {"expr": "100 * (i ?? arr.length-1)"}, // percent of own width
 					"height": "100%",
 					"border": "1px solid",
+					// This view uses some special properties provided by the animation library.
+					"xPercent": {"expr": "100 * (i ?? arr.length-1)"}, // (percent of own width)
 					"autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
 				}
 			]
@@ -53,8 +71,12 @@ to *conditions*, which can make it easier to script text descriptions.
 			"name": "text",
 			"type": "text",
 			"conditions": [
+				/*
+				Conditions are also very useful for defining a "text box" that will be
+				reused with different content across steps.
+				*/
 				{
-					"if": {"expr": "inside(label, 'check')"},
+					"if": {"expr": "inside(label, 'check') && !inside(label, 'found')"},
 					"then": {"content": {"expr": "'currently checking index ' + i"}}
 				},
 				{
@@ -67,7 +89,7 @@ to *conditions*, which can make it easier to script text descriptions.
 				}
 			],
 			/*
-			This line exists to prevent `content` from becoming undefined
+			This last line prevents `content` from becoming undefined
 			on the last step (at the end of the method).
 			*/
 			"content": {"persist": true}
