@@ -1,8 +1,11 @@
-// This is a simpler example that we can use to explain the basics of the visualizer.
+/*
+This is a simpler example that we can use to explain the basics of the visualizer.
+
+There isn't really an algorithm
+*/
 {
   /*
   This first line sets the trace file that this visualization will be animating.
-  The visualizer works by replayng the events recorded in this trace file.
   The trace file needs to be generated before the visualization can run;
   unfortunately, this browser-based demo cannot generate trace files,
   so pre-generated traces are included instead.
@@ -16,7 +19,7 @@
   "frame": "av1_basics.Basics:main",
 
   /*
-  Now is a good time to open the `Main.java` file in this directory.
+  Now is a good time to open the `Basics.java` file in this directory.
   If your screen is large enough, it may be easiest to drag the tab into its own tab group
   below or beside this one so that you can view both files simultaneously.
   */
@@ -29,14 +32,12 @@
     /*
     Here, we have a step that refers to a label in the Java code.
     In particular, this creates a step right before each time
-    the program execution reaches line 13 of `Basics.java`.
+    the program execution reaches line 12 of `Basics.java`.
 
-    Labels are the primary way to specify steps in the visualizer,
-    but we'll see another timing-related use for them later.
+    Labels are the primary way to specify steps in the visualizer.
     */
     {"label": "multiply", "side": "start", "pause": true}
   ],
-  // Note: there's always an implicit step at the end of the root method.
 
   /*
   The `views` array determines what gets displayed in the visualization at each step.
@@ -66,10 +67,13 @@
     {
       "type": "text",
 
-      // Often, text views use an *expression* to display a value from the trace.
+      /*
+      Often, text views use an *expression* to display a value from the trace.
+
+      By default, when this property's value changes, the visualization uses a
+      "rolling up" animation to update the value displayed.
+      */
       "content": {"expr": "number"},
-      // By default, when the property's value changes, the visualization uses a
-      // "rolling up" animation to update the value displayed.
 
       // Some more static CSS properties.
       "margin": "60px",
@@ -77,8 +81,10 @@
       "border": "1px solid gray",
       "overflow": "hidden",
 
-      // This next CSS property is set by another expression, making the font size
-      // increase as the displayed number increases.
+      /*
+      This next CSS property is set by another expression, making
+      the font size increase as the displayed number increases.
+      */
       "fontSize": {"expr": "number + 10"},
 
       // Expressions can use a subset of JavaScript.
@@ -88,18 +94,22 @@
       "myOpacity": 0.5,
       "myBrightness": {"expr": "255 / 2"},
       "background": {"expr": "rgb(self.myBrightness,self.myBrightness,self.myBrightness,self.myOpacity)"}
-      /* Expressions also have access to a handful of special functions, such as `rgb` used here.
-      They won't be listed in this demo, though, since they're not important to the research. */
+      /*
+      Expressions also have access to a handful of special functions,
+      such as `rgb` used here to set red/green/blue/opacity values
+      of a color.
+      */
     }
   ]
 }
 /*
-Finally, note that you can edit this file and click the Preview button (play icon)
-again to view the effects of your changes.
-E.g., you can try changing the text `color` so that it uses the `rgb` function
-to gradually turn more red on each step, depending on the value of `number`.
+Finally, note that you can edit this file and click the Preview button
+(play icon) again to view the effects of your changes.
+E.g., you can try changing the text `color` so that it uses the
+`rgb` function to gradually change colors on each step depending on
+the value of `number`.
 
-Note: if your changes cause errors, the preview panel will stop responding and
-the error will be logged to the browser console, but there won't be any notification
-in the main UI.
+Note: if your changes cause errors, the preview panel will stop
+responding and the error will be logged to the browser console,
+but there won't be any notification in the main UI.
 */

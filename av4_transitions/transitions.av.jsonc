@@ -1,109 +1,118 @@
 /*
-Now back to one last toy example that we'll use to introduce the "transition"
-sub-property that changes how the parent property animates between steps.
+Now back to one last toy example that we'll use to introduce the
+"transition" sub-property that changes how the parent property
+animates between steps.
 
-You'll want to read through the commments of this visualization as you
-step through the visualization so you can see what they refer to.
+You'll want to read through the commments of this visualization
+as you step through the visualization so you can see what
+they refer to.
 */
 {
-	"traceFile": "./trace.json",
-	"frame": "av4_transitions.Transitions:main",
-	"steps": [
-		{"label": "before", "pause": true},
-		{"label": "swap", "side": "end", "pause": true}
-	],
-	"views": [
-		{
-			"name": "array",
-			"type": "array",
-			"array": {"expr": "arr"},
-			"margin": "60px",
-			"elementConfig": {
-				"fontSize": 20,
-				"content": {
-					"persist": true
-				},
-				"conditions": [
-					/*
-					The first step shows what happens when the `content`'s transition
-					is not configured--the default transition doesn't express
-					swapping values well.
-					*/
-					{
-						/*
-						On the second step, we configure `content` to use
-						the special swapping transition.
-						*/
-						"if": {"expr": "inside(label, 'swap') && i === 1"},
-						"then": {
-							"content": {
-								"transition": {
-									"type": "swap",
-									// `from`/`to` specify the name of the source/destination.
-									// Yes, it's a bit ugly.
-									"from": {"expr": "'array$' + i"},
-									"to": {"expr": "'array$' + (i+1)"},
-									"swing": 50 // controls how far items swing around
-								}
-							}
-						}
-					},
-					{
-						/*
-						On the third step, we rotate the other way.
-						*/
-						"if": {"expr": "inside(label, 'swap') && i === 2"},
-						"then": {
-							"content": {
-								"transition": {
-									"type": "swap",
-									"from": {"expr": "'array$' + i"},
-									"to": {"expr": "'array$' + (i+1)"},
-									"swing": -50
-								}
-							}
-						}
-					},
-					{
-						/*
-						On the fourth step, we swap more slowly.
-						*/
-						"if": {"expr": "inside(label, 'swap') && i === 3"},
-						"then": {
-							"content": {
-								"transition": {
-									"type": "swap",
-									"from": {"expr": "'array$' + i"},
-									"to": {"expr": "'array$' + (i+1)"},
-									"swing": 50,
-									"duration": 1.5 // seconds
-								}
-							}
-						}
-					},
-					{
-						/*
-						On the fifth step, we delay half of the swap.
-						*/
-						"if": {"expr": "inside(label, 'swap') && i === 4"},
-						"then": {
-							"content": {
-								"transition": {
-									"type": "swap",
-									"from": {"expr": "'array$' + i"},
-									"to": {"expr": "'array$' + (i+1)"},
-									"swing": 50,
-									"delay": {"expr": "self.index === 5 ? 0.3 : 0"}
-									// also in seconds
-								}
-							}
-						}
-						// (This can cause some weird flashing due to quirks with HTML rendering.)
-					}
-				]
-			}
-		}
-	]
+  "traceFile": "./trace.json",
+  "frame": "av4_transitions.Transitions:main",
+  "steps": [
+    {"label": "before", "pause": true},
+    {"label": "swap", "side": "end", "pause": true}
+  ],
+  "views": [
+    {
+      "name": "array",
+      "type": "array",
+      "array": {"expr": "arr"},
+      "margin": "60px",
+      "elementConfig": {
+        "fontSize": 20,
+        "content": {
+          "persist": true
+        },
+        /*
+        We'll use conditions to configure different transitions
+        for each step.
+        */
+        "conditions": [
+          /*
+          The first step shows what happens when the transition for
+          `content` is not configured--the default transition doesn't
+          convey swapping values very well.
+          */
+          {
+            /*
+            On the second step, we configure `content` to use
+            the special swapping transition.
+            */
+            "if": {"expr": "inside(label, 'swap') && i === 1"},
+            "then": {
+              "content": {
+                "transition": {
+                  "type": "swap",
+                  /*
+                  `from` and `to` specify the name of the source
+                  and destination of the swap.
+                  (Yes, it's pretty ugly syntax.)
+                  */
+                  "from": {"expr": "'array$' + i"},
+                  "to": {"expr": "'array$' + (i+1)"},
+                  "swing": 50 // controls how far items swing around
+                }
+              }
+            }
+          },
+          {
+            /*
+            On the third step, we rotate the other way.
+            */
+            "if": {"expr": "inside(label, 'swap') && i === 2"},
+            "then": {
+              "content": {
+                "transition": {
+                  "type": "swap",
+                  "from": {"expr": "'array$' + i"},
+                  "to": {"expr": "'array$' + (i+1)"},
+                  "swing": -50 // this is negative now
+                }
+              }
+            }
+          },
+          {
+            /*
+            On the fourth step, we swap more slowly.
+            */
+            "if": {"expr": "inside(label, 'swap') && i === 3"},
+            "then": {
+              "content": {
+                "transition": {
+                  "type": "swap",
+                  "from": {"expr": "'array$' + i"},
+                  "to": {"expr": "'array$' + (i+1)"},
+                  "swing": 50,
+                  "duration": 1.5 // seconds
+                }
+              }
+            }
+          },
+          {
+            /*
+            On the fifth step, we delay half of the swap.
+            */
+            "if": {"expr": "inside(label, 'swap') && i === 4"},
+            "then": {
+              "content": {
+                "transition": {
+                  "type": "swap",
+                  "from": {"expr": "'array$' + i"},
+                  "to": {"expr": "'array$' + (i+1)"},
+                  "swing": 50,
+                  "delay": {"expr": "self.index === 5 ? 0.3 : 0"}
+                  // expression for delay, in seconds
+                }
+              }
+            }
+            // (This can cause some weird flashing due to quirks with HTML rendering.)
+          }
+        ]
+      }
+    }
+  ]
 }
 /*
 (The current system has very few transitions, since creating those is

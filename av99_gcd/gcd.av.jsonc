@@ -1,12 +1,27 @@
 /*
-And now, for one last complex example: Euclid's algorithm for
-calculating the greatest common divisor of two integers.
+And now, for one last complex example.
+
+Algorithm intro: this is Euclid's algorithm for calculating the
+greatest common divisor of two integers.
 
 This isn't really a "computer science" algorithm, but we can
-still visualize it (and hopefully a fairly intuitive way, too).
+still visualize it (and hopefully in a fairly intuitive way, too).
 
-Once again, don't bother reading the rest of this file;
+Visualization goal: explain the algorithm in 2 "phases:"
+1. explain a basic version of the algorithm
+2. explain a more-optimized version
+
+Once again, don't bother reading the visualization specification;
 just check out the fancy things happening in the preview.
+
+Technical notes:
+- The two phases share much of the same visualization logic,
+  despite having different code. You can check out the `part1`
+  and `part2` methods in `GCD.java` to see how they use the
+  same labels to enable this.
+- The animations are achieved by creating an `array` view of
+  rectangles to represent "chunks" of the input values, then
+  using a special transition to move them around.
 */
 {
   "traceFile": "./trace.json",
@@ -45,7 +60,7 @@ just check out the fancy things happening in the preview.
             "updatedVals": {"expr": "[a, c]"}
           }
         },
-        // convenience conditions
+        // shared timing logic
         {
           "name": "part1",
           "if": {"expr": "inside(method, 'av99_gcd.GCD:part1')"}
@@ -125,7 +140,7 @@ just check out the fancy things happening in the preview.
           "output": {"expr": "output"}
         },
         {
-          "name": "bars",
+          "name": "bars", // both the bars and their labels on top/bottom
           "type": "array",
           "array": {"expr": "[a, b]"},
           "alignItems": "stretch",

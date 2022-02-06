@@ -1,98 +1,111 @@
 /*
-Now for our first non-trivial example, along with an introduction to *conditions*,
-which can make it easier to define complex behaviors or scripted text.
+Now for our first non-trivial example, along with an introduction
+to *conditions*, which can make it easier to define complex
+behaviors or scripted text.
+
+(There's no need to focus on every line of this file; the comments
+highlight the important parts.)
 */
 {
-	"traceFile": "./trace.json",
-	"frame": "av3_conditions.LinearSearch:linearSearch",
-	"steps": [
-		{"label": "check", "pause": true},
-		{"label": "found", "pause": true},
-		{"label": "notfound", "pause": true}
-	],
-	"views": [
-		{
-			// The `html` view type is just a <div> that holds child views.
-			"type": "html",
-			"height": 50,
-			"position": "relative",
-			"margin": "2em",
-			"children": [ // These are the child views that produce the visible content.
-				{
-					"name": "array", // the numbers
-					"type": "array",
-					"array": {"expr": "arr"},
-					"height": "100%",
-					"elementConfig": {
-						"color": "white",
-						"fontSize": 20,
+  "traceFile": "./trace.json",
+  "frame": "av3_conditions.LinearSearch:linearSearch",
+  "steps": [
+    {"label": "check", "pause": true},
+    {"label": "found", "pause": true},
+    {"label": "notfound", "pause": true}
+  ],
+  "views": [
+    {
+      "type": "html",
+      "height": 50,
+      "position": "relative",
+      "margin": "2em",
+      /*
+      The `html` view type is just a <div> that holds child views.
+      The child views here are the things that produce the visible
+      content.
 
-						/*
-						Here, we see a basic application of conditions.
+      (For the curious, this wrapper view is used to position the box
+      over the current value in the array; weird HTML/CSS stuff.)
+      */
+      "children": [
+        {
+          "name": "array", // the numbers
+          "type": "array",
+          "array": {"expr": "arr"},
+          "height": "100%",
+          "elementConfig": {
+            "color": "white",
+            "fontSize": 20,
 
-						Instead of using a ternary conditional operator
-						(`boolean ? ifTrue : ifFalse`), we can separate the ifTrue
-						value from the ifFalse value (the default).
+            /*
+            Here, we see a basic usage of a condition.
 
-						This also allows us to set multiple values using the same
-						boolean check.
-						E.g., try setting the fontSize of the current item to 30.
-						*/
-						"conditions": [
-							{
-								"if": {"expr": "i == self.index"},
-								"then": {
-									"color": "red"
-								}
-							}
-						]
-					}
-				},
-				{
-					/*
-					This view defines the rectangle around the current item.
-					Feel free to skip to the last view; there's nothing important here.
-					*/
-					"name": "box",
-					"type": "html",
-					"position": "absolute", // (used to place over the numbers)
-					"top": 0,
-					"width": {"expr": "(100 / arr.length) + '%'"},
-					"height": "100%",
-					"border": "1px solid",
-					// This view uses some special properties provided by the animation library.
-					"xPercent": {"expr": "100 * (i ?? arr.length-1)"}, // (percent of own width)
-					"autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
-				}
-			]
-		},
+            Instead of using a ternary conditional operator like
+            `boolean ? ifTrue : ifFalse`, we can separate the three
+            values onto different lines for readability--very useful
+            if we need to chain multiple if checks.
 
-		{
-			"name": "text",
-			"type": "text",
-			"conditions": [
-				/*
-				Conditions are also very useful for defining a "text box" that will be
-				reused with different content across steps.
-				*/
-				{
-					"if": {"expr": "inside(label, 'check') && !inside(label, 'found')"},
-					"then": {"content": {"expr": "'currently checking index ' + i"}}
-				},
-				{
-					"if": {"expr": "inside(label, 'found')"},
-					"then": {"content": {"expr": "target + ' found at index ' + i"}}
-				},
-				{
-					"if": {"expr": "inside(label, 'notfound')"},
-					"then": {"content": {"expr": "target + ' not found'"}}
-				}
-			],
-			/*
-			This last line prevents `content` from becoming undefined
-			on the last step (at the end of the method).
-			*/
-			"content": {"persist": true}
-		}
-	]
+            This also allows us to set multiple values using the same
+            boolean check.
+            E.g., try setting the `fontSize` of the current item to 30
+            using the condition below.
+            */
+            "conditions": [
+              {
+                "if": {"expr": "i == self.index"},
+                "then": {
+                  "color": "red"
+                }
+              }
+            ]
+          }
+        },
+        {
+          /*
+          This view defines the rectangle around the current item.
+          Feel free to skip to the last view; there's nothing
+          important here.
+          */
+          "name": "box",
+          "type": "html",
+          "position": "absolute",
+          "top": 0,
+          "width": {"expr": "(100 / arr.length) + '%'"},
+          "height": "100%",
+          "border": "1px solid",
+          "xPercent": {"expr": "100 * (i ?? arr.length-1)"},
+          "autoAlpha": {"expr": "i !== undefined ? 1 : 0"}
+        }
+      ]
+    },
+
+    {
+      "name": "text",
+      "type": "text",
+      "conditions": [
+        /*
+        Conditions are also very useful for defining a "text box"
+        that will be reused with different content across steps.
+
+        The `inside` method is crucial for this application:
+        it can return a boolean depending on whether the current
+        step is inside a given label.
+        */
+        {
+          "if": {"expr": "inside(label, 'check') && !inside(label, 'found')"},
+          "then": {"content": {"expr": "'currently checking index ' + i"}}
+        },
+        {
+          "if": {"expr": "inside(label, 'found')"},
+          "then": {"content": {"expr": "target + ' found at index ' + i"}}
+        },
+        {
+          "if": {"expr": "inside(label, 'notfound')"},
+          "then": {"content": {"expr": "target + ' not found'"}}
+        }
+      ],
+      "content": {"persist": true}
+    }
+  ]
 }
