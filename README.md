@@ -31,9 +31,9 @@ For each visualization, the `.java` file(s) contain the code for the algorithm b
 Open the `.av.jsonc` files in order to preview the visualizations.
 (The `trace.json` files contain the program traces; they're not meant to be read by humans.)
 
-1. **Subarray Sum:** an example of what this system can do.
-2. **Basics:** a basic explanation of the `.av.jsonc` files.
-3. **Arrays:** another simple example, this time with an array.
-4. **Conditions:** an easier way to add dynamic text or more-complex styles.
-5. **Transitions:** specifying how the visualization animates between steps.
-6. **GCD:** another complex example to finish things off
+0. **Subarray Sum:** an example of what this system can do.
+1. **Basics:** a basic explanation of the `.av.jsonc` files.
+2. **Arrays:** another simple example, this time with an array.
+3. **Conditions:** an easier way to add dynamic text or more-complex styles.
+4. **Transitions:** specifying how the visualization animates between steps.
+5. **GCD:** another complex example to finish things off
