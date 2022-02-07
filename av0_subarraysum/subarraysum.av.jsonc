@@ -20,6 +20,9 @@ and 'Previous Step' buttons to step through the visualization.
 
 Once you're done, move on to the next visualization (`av1_basics`).
 Don't bother trying to read the rest of this file.
+
+Note: You may want to click back into this editor panel before opening
+the next `.av.jsonc` file to make sure it opens in this tab group.
 */
 {
   "traceFile": "./trace.json",
