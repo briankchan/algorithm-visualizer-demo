@@ -26,14 +26,14 @@ The full version of the visualizer currently runs as an extension to the Visual 
 
 ## Visualizations
 
-Each directory in this demo contians a different visualization.
+Each directory (other than `.vscode`) in this demo contains a different visualization.
 For each visualization, the `.java` file(s) contain the code for the algorithm being visualized and the `.av.jsonc` file specifies the visualization.
 Open the `.av.jsonc` files in order to preview the visualizations.
 (The `trace.json` files contain the program traces; they're not meant to be read by humans.)
 
-1. [Subarray Sum](./av0/subarraysum.av.jsonc): an example of what this system can do.
-2. [Basics](./av1_basics/basics.av.jsonc): a basic explanation of the `.av.jsonc` files.
-3. [Arrays](./av2_arrays/arrays.av.jsonc): another simple example, this time with an array.
-4. [Conditions](./av3_conditions/linearsearch.av.jsonc): an easier way to add dynamic text or more-complex styles.
-5. [Transitions](./av4_transitions/transitions.av.jsonc): specifying how the visualization animates between steps.
-6. [GCD](./av99_gcd/gcd.av.jsonc): another complex example to finish things off
+1. **Subarray Sum:** an example of what this system can do.
+2. **Basics:** a basic explanation of the `.av.jsonc` files.
+3. **Arrays:** another simple example, this time with an array.
+4. **Conditions:** an easier way to add dynamic text or more-complex styles.
+5. **Transitions:** specifying how the visualization animates between steps.
+6. **GCD:** another complex example to finish things off
