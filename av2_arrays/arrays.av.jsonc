@@ -1,38 +1,55 @@
 /*
+===== Intro =====
+
 Of course, there's not too much we can do with just variables,
 so this example introduces arrays.
+
+Read through the comments to learn how to display arrays.
 */
 {
-	"traceFile": "./trace.json",
-	"frame": "av2_arrays.Arrays:main",
-	"steps": [
-		{"label": "increment", "side": "end", "pause": true}
-	],
-	"views": [
-		{
-			// This is an array view, which is usually used to display an array of values.
-			"type": "array",
+  "traceFile": "./trace.json",
+  "frame": "av2_arrays.Arrays:main",
+  "steps": [
+    {"label": "increment", "side": "end", "pause": true}
+  ],
+  "views": [
+    {
+      // This is an array view, usually used to display an array of values.
+      "type": "array",
 
-			/*
-			The `array` property specifies the array to display;
-			usually, this will be an expression, but JSON array literals are supported too.
-			*/
-			"array": {"expr": "numbers"},
-			"margin": "60px",
+      /*
+      The `array` property specifies the array to display; usually, this
+      will be an expression, but JSON array literals are supported too.
+      */
+      "array": {"expr": "numbers"},
+      "margin": "60px",
 
-			/*
-			The `elementConfig` property is special: it properties for the array elements.
-			Each element of the array will get its own view with these properties.
-			(There are some additional default properties, e.g., `type` is `text`,
-			and `content` is the value at the index in the array.)
-			*/
-			"elementConfig": {
-				"fontSize": 20,
-				"borderColor": "white",
-				"border": "1px solid",
-				"overflow": "hidden",
-				"color": {"expr": "i == self.index ? 'red' : 'white'"}
-			}
-		}
-	]
+      /*
+      The `elementConfig` property is special: it specifies properties for
+      the array's elements.
+      Each element of the array will get its own view with these properties.
+      (There are some additional default properties, e.g., `type` is `text`,
+      and `content` is the value at the index in the array.)
+      */
+      "elementConfig": {
+        "fontSize": 20,
+        "borderColor": "white",
+        "border": "1px solid",
+        "overflow": "hidden",
+        "color": {"expr": "i == self.index ? 'red' : 'white'"}
+      }
+    }
+  ]
 }
+/*
+Extra:
+
+`elementConfig` is more powerful than it may initially seem.
+E.g., by changing the elements' types to be array, we can display an array
+or arrays; then, we can use expressions to generate an content for each:
+
+"type":"array",
+"array": {"expr": "slice(self.parent.array ?? [], self.index, self.index+2)"}
+
+Each array element would then display a pair of values from the original array.
+*/

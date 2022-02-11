@@ -1,11 +1,15 @@
 /*
-This is a simpler example that we can use to explain the basics of the visualizer.
+===== Intro =====
 
-There isn't really an algorithm
+This is a simpler example that we can use to explain the basics of
+the visualizer.
+
+There isn't really an "algorithm" in this example; instead, the
+focus is on the comments in this file.
 */
 {
   /*
-  This first line sets the trace file that this visualization will be animating.
+  This first line sets the trace file that this visualization will animate.
   The trace file needs to be generated before the visualization can run;
   unfortunately, this browser-based demo cannot generate trace files,
   so pre-generated traces are included instead.
@@ -20,8 +24,9 @@ There isn't really an algorithm
 
   /*
   Now is a good time to open the `Basics.java` file in this directory.
-  If your screen is large enough, it may be easiest to drag the tab into its own tab group
-  below or beside this one so that you can view both files simultaneously.
+  If your screen is large enough, it may be easiest to drag the tab into
+  its own tab group below or beside this one so that you can view both
+  files simultaneously.
   */
 
   /*
@@ -40,9 +45,10 @@ There isn't really an algorithm
   ],
 
   /*
-  The `views` array determines what gets displayed in the visualization at each step.
-  Views are defined declaratively, with the ability to use *expressions* that
-  reference variables from the Java code.
+  The `views` array determines what gets displayed in the visualization at
+  each step.
+  Views are defined declaratively, with the ability to use *expressions*
+  that reference variables from the Java code.
   As the visualization plays, these expressions will update dynamically
   to reflect changes in the program state.
   */
@@ -70,8 +76,8 @@ There isn't really an algorithm
       /*
       Often, text views use an *expression* to display a value from the trace.
 
-      By default, when this property's value changes, the visualization uses a
-      "rolling up" animation to update the value displayed.
+      By default, when this property's value changes, the visualization uses
+      a "rolling up" animation to update the value displayed.
       */
       "content": {"expr": "number"},
 
@@ -105,7 +111,8 @@ There isn't really an algorithm
 /*
 Finally, note that you can edit this file and click the Preview button
 (play icon) again to view the effects of your changes.
-E.g., you can try changing the text `color` so that it uses the
+
+E.g., you can try changing the text `color` (line 93) so that it uses the
 `rgb` function to gradually change colors on each step depending on
 the value of `number`.
 

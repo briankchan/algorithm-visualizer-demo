@@ -1,10 +1,17 @@
 /*
+===== Intro =====
+
 Now for our first non-trivial example, along with an introduction
 to *conditions*, which can make it easier to define complex
 behaviors or scripted text.
 
 (There's no need to focus on every line of this file; the comments
 highlight the important parts.)
+
+
+===== The algorithm =====
+
+Just a simple linear search through an array to look for a target value.
 */
 {
   "traceFile": "./trace.json",

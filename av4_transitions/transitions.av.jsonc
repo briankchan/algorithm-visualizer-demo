@@ -1,4 +1,6 @@
 /*
+===== Intro =====
+
 Now back to one last toy example that we'll use to introduce the
 "transition" sub-property that changes how the parent property
 animates between steps.

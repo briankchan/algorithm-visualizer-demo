@@ -1,15 +1,26 @@
 /*
+===== Intro =====
+
 And now, for one last complex example.
 
-Algorithm intro: this is Euclid's algorithm for calculating the
-greatest common divisor of two integers.
+
+===== The algorithm =====
+
+This is Euclid's algorithm for calculating the greatest common
+divisor of two integers.
 
 This isn't really a "computer science" algorithm, but we can
 still visualize it (and hopefully in a fairly intuitive way, too).
 
-Visualization goal: explain the algorithm in 2 "phases:"
+
+===== Visualization goal =====
+
+Explain the algorithm in 2 "phases:"
 1. explain a basic version of the algorithm
 2. explain a more-optimized version
+
+
+===== Notes =====
 
 Once again, don't bother reading the visualization specification;
 just check out the fancy things happening in the preview.
