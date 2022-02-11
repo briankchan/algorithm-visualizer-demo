@@ -8,5 +8,6 @@
 	"java.project.sourcePaths": [
 		"."
 	],
-	"java.settings.url": "./org.eclipse.jdt.core.prefs"
+	"java.settings.url": "./org.eclipse.jdt.core.prefs",
+	"editor.minimap.enabled": false
 }
