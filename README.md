@@ -20,6 +20,9 @@ You can view (and edit) the example visualizations by opening the various `.av.j
 (Make sure to go through them in numerical order and read the header comments for full context.)
 
 The visualizations can be previewed by clicking the "play" button at the top-right of the editor.
+(The button only shows up when the `.av.jsonc` editor panel is selected; e.g., it will be hidden if you click the preview panel controls.)
+
+![Image showing preview button.](./previewing.png "Previewing visualizations")
 
 ## Visualizations
 
