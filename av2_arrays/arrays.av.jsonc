@@ -52,4 +52,6 @@ or arrays; then, we can use expressions to generate an content for each:
 "array": {"expr": "slice(self.parent.array ?? [], self.index, self.index+2)"}
 
 Each array element would then display a pair of values from the original array.
+You can try adding the above code to the `elementConfig` object above to see
+what this looks like.
 */

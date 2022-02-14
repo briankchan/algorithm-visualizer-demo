@@ -207,7 +207,7 @@ the next `.av.jsonc` file to make sure it opens in this tab group.
           "name": "tooBig",
           "if": {"expr": "inside(label, 'tooBig')"},
           "then": {
-            "content": {"expr": "'Now this is too big. Expanding the array on the right will only make this worse, but shrinking it from the right will make the sum too small... Thus, we can conclude that the item at index ' + iterationFirst + ' can never be included in the sum, and we must shrink the subarray from the left.'"} // "if we shrink the right side, we'll get something we've already tried"  1 1 1 5 "or something smaller than what we've already tried"
+            "content": {"expr": "'Now this is too big. Expanding the array on the right will only make this worse, but shrinking it from the right will make the sum too small... Thus, we can conclude that the item at index ' + iterationFirst + ' can never be included in the sum, and we must shrink the subarray from the left.'"} // this is verbose; should be split up
           }
         },
         {

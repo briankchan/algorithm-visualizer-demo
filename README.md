@@ -41,7 +41,7 @@ Each directory (other than `.vscode`) in this demo contains a different visualiz
     * One last toy example to explain how to customize animations.
 5. **GCD**
     * Another complex example to finish things off.
-    * This one stretches
+    * This one stretches the system a bit to create interesting graphics.
 
 For each visualization, the `.java` file(s) contain the code for the algorithm being visualized and the `.av.jsonc` file specifies the visualization.
 (The `trace.json` files contain the program traces; they're not meant to be read by humans.)
