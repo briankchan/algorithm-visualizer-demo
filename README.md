@@ -15,6 +15,8 @@ Normally, visualizations can be created in 2ish steps:
 
 The full version of the visualizer currently runs as an extension to the Visual Studio Code (VSCode) text editor; this online demo uses a modified version of VSCode that can run in browsers and supports step 2, but not step 1.
 
+### Previewing
+
 You can view (and edit) the example visualizations by opening the various `.av.jsonc` files in the folders displayed in the file explorer to the left.
 
 (Make sure to go through them in numerical order and read the header comments for full context.)
